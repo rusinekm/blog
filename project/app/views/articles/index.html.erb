@@ -5,7 +5,6 @@
       
       <h5>by <%=  %> submitted on <%= article.display_date %> </h5>
       <h3> <%= article.content %> </h3>
-      <br>
       <h5>comments: <%= article.comment_number %> <%= link_to 'show details', article %>
         <% #if current_user && current_user.su %>
         <% link_to 'Edit', edit_article_path(article) %>

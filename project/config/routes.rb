@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :articles do 
     resources :comments
   end
+  get '/', to: 'articles#index', as: '/'
+
   root 'articles#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
