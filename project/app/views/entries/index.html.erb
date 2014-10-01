@@ -1,0 +1,24 @@
+<h1>Listing Articles</h1>
+
+    <% @articles.each do |article| %>
+      <h2> article.title </h2>
+      
+      <h4>by <%=  %> submitted on <%= article.date %> </h4>
+      <h3> <%= article.content %> </h3>
+      <br>
+      <h4>comments: <%= article.comment.number %> <%= link_to 'show details', article %>
+      
+        <% #if current_user && current_user.su %>
+        <%= link_to 'Edit', edit_entry_path(article) %>
+        <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% #end %>
+        <br><br>
+    <% end %>
+ 
+
+
+<br>
+
+<% #if current_user && current_user.su %>
+  <%= link_to 'New Article', new_entry_path %>
+<% #end %>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<h1>
+<strong>  <%= @article.title %></strong>
+</h1>
+</p>
+
+<p>  <h5>by <%=  %> submitted on <%= @article.display_date %> </h5></p>
+
+<p>
+  <%= @article.content %>
+</p>
+
+<p>
+  <%= link_to 'Add a Comment', new_article_comment_path(@article) %>
+</p>
+<% @article.comments.each do |comment| %>
+      <h2> <%= comment.title %></h2>
+      
+      
+      <h3> <%= comment.content %> </h3>
+      <h5>by <%if comment.user_id %> 
+      <%= comment.user_id %>
+      <% else %> anonim <% end %> submitted on <%= comment.display_date %> </h5>
+        <% #if current_user && current_user.su %>
+        <% link_to 'Edit', edit_article_path(@article) %>
+        <% link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% #end %>
+
+        <br></h5>
+    <% end %>
+
+    <%= link_to 'Wróć do Strony głównej', articles_path %>
