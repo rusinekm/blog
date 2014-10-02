@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   belongs_to :article
-# belongs_to :user
+  belongs_to :user
+
     def display_date
     if Time.now - created_at > 7.days
        created_at.strftime('%e-%b-%Y')
@@ -8,4 +9,5 @@ class Comment < ActiveRecord::Base
       created_at.strftime('%e-%b-%Y, %H:%M')
     end
   end
+
 end

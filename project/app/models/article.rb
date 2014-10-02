@@ -1,7 +1,6 @@
 class Article < ActiveRecord::Base
-# belongs_to :user
+  belongs_to :user
   default_scope {order('created_at DESC')}
-
   has_many :comments
   has_many :tags, through: :relations
   has_many :relations
@@ -9,6 +8,7 @@ class Article < ActiveRecord::Base
   def comment_number
     comments.count
   end
+
 
   def tag_names
   end
@@ -28,4 +28,5 @@ class Article < ActiveRecord::Base
       created_at.strftime('%e-%b-%Y, %H:%M')
     end
   end  
+
 end

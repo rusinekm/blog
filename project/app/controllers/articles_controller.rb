@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :article, only: [:show, :edit, :update]
+  before_action :article, only: [:show, :edit, :update, :destroy]
 
   def index
     @articles = Article.all
@@ -19,6 +19,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(perm_params)
+    @article.user = current_user
     if article.save
       @article.assign_tags(params[:article][:tag_names])
       redirect_to articles_path
@@ -34,8 +35,10 @@ class ArticlesController < ApplicationController
   def update
   end
 
-  # def destroy
-  # end
+  def destroy
+    @article.destroy
+    redirect_to articles_path
+  end
 
   def article
     @article ||= Article.find(params[:id])

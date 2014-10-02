@@ -1,20 +1,9 @@
-<h1>Listing Articles</h1>
-<div id="user-widget">
-  <% if current_user %>
-    Welcome <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
-</div>
+<h1>Listing Articles by tag</h1>
+pokaz cos
     <% @articles.each do |article| %>
       <h2> <%= article.title %></h2>
       
-      <h5>by
-      <% if article.user_id %>
-      <%=  article.user.name %> 
-      <% end %>
-      submitted on <%= article.display_date %> </h5>
+      <h5>by <%=  %> submitted on <%= article.display_date %> </h5>
       <h3> <%= article.content %> </h3>
       <h5>comments: <%= article.comment_number %> <%= link_to 'show details', article %>
         <% if current_user && current_user.su %>
@@ -22,10 +11,8 @@
         <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
       <br></h5>
-      <% if article.tags != []%>
       <p>tags: <% article.tags.each do |tag| %>
         <%= link_to tag.name, tagindex_path(tag.id) %> ,
-      <% end %>
       <% end %>
        </p>
     <% end %>
@@ -34,6 +21,7 @@
 
 <br>
 
-<% if current_user && current_user.su %>
+<% if current_user %>
   <%= link_to 'New Article', new_article_path %>
 <% end %>
+<%= link_to 'Wróć do Strony głównej', articles_path %>

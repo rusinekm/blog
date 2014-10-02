@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   resources :articles do 
-    resources :comments
-    #member do
-      
-    
+    resources :comments 
   end
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   get'/tagindex/:tag_name', to: 'articles#tagindex', as: 'tagindex'
-  #get "/tagindex/:tag_name"  
   root 'articles#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
