@@ -1,15 +1,15 @@
-<h1>Listing Articles</h1>
-
+<h1>Listing Articles by tag</h1>
+pokaz cos
     <% @articles.each do |article| %>
       <h2> <%= article.title %></h2>
       
       <h5>by <%=  %> submitted on <%= article.display_date %> </h5>
       <h3> <%= article.content %> </h3>
       <h5>comments: <%= article.comment_number %> <%= link_to 'show details', article %>
-        <% #if current_user && current_user.su %>
+
         <% link_to 'Edit', edit_article_path(article) %>
         <% link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% #end %>
+   
       <br></h5>
       <p>tags: <% article.tags.each do |tag| %>
         <%= link_to tag.name, tagindex_path(tag.id) %> ,
@@ -21,6 +21,4 @@
 
 <br>
 
-<% #if current_user && current_user.su %>
   <%= link_to 'New Article', new_article_path %>
-<% #end %>

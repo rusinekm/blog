@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   resources :articles do 
     resources :comments
+    #member do
+      
+    
   end
-  get '/', to: 'articles#index', as: '/'
-
+  get'/tagindex/:tag_name', to: 'articles#tagindex', as: 'tagindex'
+  #get "/tagindex/:tag_name"  
   root 'articles#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

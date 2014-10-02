@@ -8,9 +8,11 @@ class ArticlesController < ApplicationController
   def show
   end
 
-  def index_by_tag
-    @articles = Article.where(tag: params[:tag_name])
-  end
+  def tagindex
+    ids = Relation.where(tag_id: params[:tag_name]).map(&:article_id)
+    @articles = Article.where("id in (?)", ids)
+   
+ end
 
   def edit
   end
