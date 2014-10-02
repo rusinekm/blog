@@ -6,13 +6,14 @@
   <% else %>
     <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
   <% end %>
+ 
 </div>
     <% @articles.each do |article| %>
       <h2> <%= article.title %></h2>
       
       <h5>by
       <% if article.user_id %>
-      <%=  article.user.name %> 
+      <%=  link_to article.user.name, articles_path(name_id: article.user_id) %> 
       <% end %>
       submitted on <%= article.display_date %> </h5>
       <h3> <%= article.content %> </h3>
@@ -24,7 +25,7 @@
       <br></h5>
       <% if article.tags != []%>
       <p>tags: <% article.tags.each do |tag| %>
-        <%= link_to tag.name, tagindex_path(tag.id) %> ,
+        <%= link_to tag.name, articles_path(tag_id: tag.id) %> ,
       <% end %>
       <% end %>
        </p>
@@ -36,4 +37,5 @@
 
 <% if current_user && current_user.su %>
   <%= link_to 'New Article', new_article_path %>
-<% end %>
+<% end %><p>
+<%= link_to 'Wróć do Strony głównej', articles_path %></p>

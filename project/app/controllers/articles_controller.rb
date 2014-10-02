@@ -2,7 +2,8 @@ class ArticlesController < ApplicationController
   before_action :article, only: [:show, :edit, :update, :destroy]
 
   def index
-    @articles = Article.all
+    @articles = Article.search(params)
+
   end
 
   def show
@@ -13,6 +14,7 @@ class ArticlesController < ApplicationController
     @articles = Article.where("id in (?)", ids)
    
  end
+
 
   def edit
   end

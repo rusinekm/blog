@@ -13,6 +13,20 @@ class Article < ActiveRecord::Base
   def tag_names
   end
 
+  def self.search(params)
+    #if params[:tag_id,:name_id] 
+    if params[:tag_id]
+      ids = Relation.where(tag_id: params[:tag_id]).map(&:article_id)
+      Article.where("id in (?)", ids)
+    elsif params[:name_id]
+   #   ids = Relation.where(_id: params[:name_id]).map(&:article_id)
+    #  Article.where("id in (?)", ids)
+        Article.where(user_id: params[:name_id])
+    else
+      Article.all
+    end
+  end
+
   def assign_tags(names_string)
     tag_names = names_string.split(',').map(&:strip)
     tag_names.each do |name|
