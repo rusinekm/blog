@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :article, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin, only: [:edit, :update, :destroy]
 
   def index
     @articles = Article.search(params).paginate(:page => params[:page], :per_page => 5)
@@ -28,6 +29,11 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    if @article.update(perm_params)
+      redirect_to articles_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -43,5 +49,8 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :content)
   end
 
+  def check_admin
+    redirect_to articles_path unless current_user && current_user.su
+  end
   
 end

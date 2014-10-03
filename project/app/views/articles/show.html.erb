@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class="col-lg-8 align-center" style="background:#CCFFCC">
+<div class="col-lg-8 text-center" style="background:#CCFFCC">
   <h1>
     <strong class="text-center">  <%= @article.title %></strong>
   </h1> 
@@ -17,21 +17,21 @@
   <div class="separator col-lg-8" style="background:#FFFFFF">
     <br>
   </div>
-  <div class="col-lg-8 align-center" style="background:#CCFFCC">
+  <div class="col-lg-8 align-center" style="background:#AAFFAA">
   <% @article.comments.each do |comment| %>
     <h2 class="text-center"> <%= comment.title %></h2>        
     <h3> <%= comment.content %> </h3>
-    <h5>by 
+     <small class="pull-right">by 
       <%if comment.user_id %> 
-        <%= comment.user.name %>
+        <%= comment.user.name %>. 
       <% else %> 
-        anonim 
-      <% end %>
-      . Submitted on <%= comment.display_date %> 
-    </h5>
+        anonim.
+      <% end %> 
+      Submitted on <%= comment.display_date %> 
+    </small>
     <% if current_user && current_user.su %>
-      <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
-      <%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+      <%= link_to 'Edit', edit_article_comment_path(@article.id, comment.id), class: "btn btn-warning" %>
+      <%= link_to 'Delete', article_comment_path(@article.id, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
     <% end %>
     <br>
     </div>

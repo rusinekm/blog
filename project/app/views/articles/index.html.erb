@@ -1,4 +1,5 @@
 
+
   <% @articles.each do |article| %>
 
     <div class="col-lg-8 align-center" style="background:#CCFFCC">
@@ -8,10 +9,10 @@
       <small class="pull-right">by
         <% if article.user_id %>
           <cite>
-            <%=  link_to article.user.name, articles_path(name_id: article.user_id) %> 
+            <%=  link_to article.user.name, articles_path(name_id: article.user_id) %>.
           </cite>
         <% end %>
-        . Submitted on <%= article.display_date %> 
+        Submitted on <%= article.display_date %> 
       </small>
       <br>
       <h3>
@@ -23,7 +24,8 @@
         <%= link_to 'Show Comments', article, class: "tn btn-primary btn-xs" %>
         <% if current_user && current_user.su %>
           <%= link_to 'Edit', edit_article_path(article), class: "tn btn-warning btn-xs" %>
-          <%= link_to 'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}, class: "tn btn-danger btn-xs" %>
+          <%= link_to 'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}, class: "tn btn-danger btn-xs" %> 
+          <%= like_button(782258585130216, href: article)  %>
         <% end %>
         <br>
       </h5>
@@ -40,7 +42,7 @@
     <br> 
     </div>
   <% end %>
-  <div class="col-lg-6 align-center" style="background:#CCFFCC">
+  <div class="col-lg-8 text-center" style="background:#CCFFCC">
   <%= will_paginate @city %>
   </div>
 <br>

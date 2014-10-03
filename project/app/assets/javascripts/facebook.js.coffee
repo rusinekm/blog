@@ -4,11 +4,11 @@ jQuery ->
   $.ajax
     url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
     dataType: 'script'
-    cache: true
+    cache: false
 
 
 window.fbAsyncInit = ->
-  FB.init(appId: '782258585130216', cookie: true)
+  FB.init(appId: '782258585130216', cookie: false)
 
   $('#sign_in').click (e) ->
     e.preventDefault()
