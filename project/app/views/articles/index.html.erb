@@ -1,41 +1,45 @@
-<h1>Listing Articles</h1>
-<div id="user-widget">
-  <% if current_user %>
-    Welcome <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
- 
-</div>
-    <% @articles.each do |article| %>
-      <h2> <%= article.title %></h2>
-      
-      <h5>by
-      <% if article.user_id %>
-      <%=  link_to article.user.name, articles_path(name_id: article.user_id) %> 
-      <% end %>
-      submitted on <%= article.display_date %> </h5>
-      <h3> <%= article.content %> </h3>
-      <h5>comments: <%= article.comment_number %> <%= link_to 'show details', article %>
-        <% if current_user && current_user.su %>
-        <%= link_to 'Edit', edit_article_path(article) %>
-        <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+  <% @articles.each do |article| %>
+
+    <div class="col-lg-8 align-center" style="background:#CCFFCC">
+      <h2 class="text-center">
+        <%= article.title %>
+      </h2>
+      <small class="pull-right">by
+        <% if article.user_id %>
+          <cite>
+            <%=  link_to article.user.name, articles_path(name_id: article.user_id) %> 
+          </cite>
         <% end %>
-      <br></h5>
+        submitted on <%= article.display_date %> 
+      </small>
+      <h3>
+        <%= article.content %>
+      </h3>
+      <h5>
+        comments: 
+        <%= article.comment_number %> 
+        <%= link_to 'Show Comments', article, class: "tn btn-primary btn-xs" %>
+        <% if current_user && current_user.su %>
+          <%= link_to 'Edit', edit_article_path(article), class: "tn btn-warning btn-xs" %>
+          <%= link_to 'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}, class: "tn btn-danger btn-xs" %>
+        <% end %>
+        <br>
+      </h5>
       <% if article.tags != []%>
-      <p>tags: <% article.tags.each do |tag| %>
-        <%= link_to tag.name, articles_path(tag_id: tag.id) %> ,
+        <p>
+          tags: <% article.tags.each do |tag| %>
+            <%= link_to tag.name, articles_path(tag_id: tag.id) %> ,
+          <% end %>
+        </p>
       <% end %>
-      <% end %>
-       </p>
-    <% end %>
- 
-
-
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="separator col-lg-8" style="background:#FFFFFF">
+    <br> 
+    </div>
+  <% end %>
+  <div class="col-lg-6 align-center" style="background:#CCFFCC">
+  <%= will_paginate @city %>
+  </div>
 <br>
-
-<% if current_user && current_user.su %>
-  <%= link_to 'New Article', new_article_path %>
-<% end %><p>
-<%= link_to 'Wróć do Strony głównej', articles_path %></p>

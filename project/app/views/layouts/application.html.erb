@@ -2,11 +2,34 @@
 <html>
 <head>
   <title>Project</title>
+      
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body border: 1px solid #DDD;>
+<div class="container-fluid height:100% pull-right col-lg-2 stopka ">
+<div id="user-widget">
+  <% if current_user %>
+    Welcome <strong><%= current_user.name %></strong>!
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
+  <p class:"h-center">
+   <%= button_tag(type: 'submit', class: "btn btn-deafult ") do %>
+ <%= link_to 'Wróć do Strony głównej', articles_path, {:style=>'color:#000000;', :class => "css_class"} %>
+ <% end %>
+ </p>
+ <% if current_user && current_user.su %>
+<%= button_tag(type: 'submit', class: "btn btn-primary ") do %>
+<%= link_to 'New Article', new_article_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%>
+<% end %>
+<% end %>
+
+</div>
+</div>
+
 
 <%= yield %>
 
