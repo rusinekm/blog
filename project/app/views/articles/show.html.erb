@@ -1,36 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-<h1>
-<strong>  <%= @article.title %></strong>
-</h1>
-</p>
-
-<p>  <h5>by <%=  %> submitted on <%= @article.display_date %> </h5></p>
-
-<p>
-  <%= @article.content %>
-</p>
-
-<p>
-<% if current_user %>
-  <%= link_to 'Add a Comment', new_article_comment_path(@article) %>
-  <% end %>
-</p>
-<% @article.comments.each do |comment| %>
-      <h2> <%= comment.title %></h2>
-      
-      
-      <h3> <%= comment.content %> </h3>
-      <h5>by <%if comment.user_id %> 
-      <%= comment.user.name %>
-      <% else %> anonim <% end %> submitted on <%= comment.display_date %> </h5>
-        <% if current_user && current_user.su %>
-        <% link_to 'Edit', edit_article_path(@article) %>
-        <% link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
-
-        <br></h5>
+<div class="col-lg-8 align-center" style="background:#CCFFCC">
+  <h1>
+    <strong class="text-center">  <%= @article.title %></strong>
+  </h1> 
+  <small class="pull-right">by <%=  %> submitted on <%= @article.display_date %> </small>
+  <p>
+    <%= @article.content %>
+  </p>
+</div>
+    <% if current_user %>
+      <div class="separator col-lg-8" style="background:#FFFFFF">
+        <%= link_to 'Add a Comment', new_article_comment_path(@article), class: "btn btn-success"%>
+      </div>
     <% end %>
-
-    <%= link_to 'Wróć do Strony głównej', articles_path %>
+  <div class="separator col-lg-8" style="background:#FFFFFF">
+    <br>
+  </div>
+  <div class="col-lg-8 align-center" style="background:#CCFFCC">
+  <% @article.comments.each do |comment| %>
+    <h2 class="text-center"> <%= comment.title %></h2>        
+    <h3> <%= comment.content %> </h3>
+    <h5>by 
+      <%if comment.user_id %> 
+        <%= comment.user.name %>
+      <% else %> 
+        anonim 
+      <% end %>
+      . Submitted on <%= comment.display_date %> 
+    </h5>
+    <% if current_user && current_user.su %>
+      <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
+      <%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <% end %>
+    <br>
+    </div>
+  <% end %>

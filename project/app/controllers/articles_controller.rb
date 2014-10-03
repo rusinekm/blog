@@ -2,19 +2,12 @@ class ArticlesController < ApplicationController
   before_action :article, only: [:show, :edit, :update, :destroy]
 
   def index
-    @articles = Article.search(params).paginate(:page => params[:page], :per_page => 10)
+    @articles = Article.search(params).paginate(:page => params[:page], :per_page => 5)
 
   end
 
   def show
   end
-
-  def tagindex
-    ids = Relation.where(tag_id: params[:tag_name]).map(&:article_id)
-    @articles = Article.where("id in (?)", ids)
-   
- end
-
 
   def edit
   end

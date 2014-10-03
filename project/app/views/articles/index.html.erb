@@ -11,8 +11,9 @@
             <%=  link_to article.user.name, articles_path(name_id: article.user_id) %> 
           </cite>
         <% end %>
-        submitted on <%= article.display_date %> 
+        . Submitted on <%= article.display_date %> 
       </small>
+      <br>
       <h3>
         <%= article.content %>
       </h3>
@@ -29,7 +30,7 @@
       <% if article.tags != []%>
         <p>
           tags: <% article.tags.each do |tag| %>
-            <%= link_to tag.name, articles_path(tag_id: tag.id) %> ,
+            <%= link_to tag.name, articles_path(tag_id: tag.id), class: "btn btn-default btn-xs"%> ,
           <% end %>
         </p>
       <% end %>

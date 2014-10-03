@@ -14,14 +14,13 @@ class Article < ActiveRecord::Base
   end
 
   def self.search(params)
-    #if params[:tag_id,:name_id] 
     if params[:tag_id]
       ids = Relation.where(tag_id: params[:tag_id]).map(&:article_id)
       Article.where("id in (?)", ids)
     elsif params[:name_id]
-   #   ids = Relation.where(_id: params[:name_id]).map(&:article_id)
-    #  Article.where("id in (?)", ids)
         Article.where(user_id: params[:name_id])
+    elsif params[:search]
+        Article.where('content LIKE ?', "%#{params[:search]}%") 
     else
       Article.all
     end
