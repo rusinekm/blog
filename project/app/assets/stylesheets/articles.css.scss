@@ -3,5 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.separator { padding: 20px; }
-.stopka { height:4000px; background:#f0e68c}
+.separator { 
+    padding: 5px; 
+    }
+.stopka {
+    min-height: 900%;
+    overflow-y: hidden;;
+    background: #f0e68c; 
+    }
+.fill-height {
+    height:auto !important; 
+    height: 100%; 
+    }

@@ -4,15 +4,28 @@
   <h1>
     <strong class="text-center">  <%= @article.title %></strong>
   </h1> 
-  <small class="pull-right">by <%=  %> submitted on <%= @article.display_date %> </small>
+  <small class="pull-right">by 
+  <% if @article.user_id %>
+    <cite>
+      <%=  link_to @article.user.name, articles_path(name_id: @article.user_id) %>.
+    </cite>
+  <% end %>
+  submitted on <%= @article.display_date %> </small>
+  <br>
   <p>
     <%= @article.content %>
   </p>
-  <%= like_button(782258585130216, href: @article)  %>
+  <p class="text-left">
+    <%= like_button(782258585130216, href: @article)  %>
+  </p>
 </div>
     <% if current_user %>
       <div class="separator col-lg-8" style="background:#FFFFFF">
         <%= link_to 'Add a Comment', new_article_comment_path(@article), class: "btn btn-success"%>
+      </div>
+    <% else %>
+      <div class="separator col-lg-8" style="background:#FFFFFF">
+      Log in to post a comment
       </div>
     <% end %>
   <div class="separator col-lg-8" style="background:#FFFFFF">

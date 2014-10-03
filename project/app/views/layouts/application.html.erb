@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Project</title>
+  <title>Le Blog</title>
       
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body border: 1px solid #DDD;>
-  <div class="container-fluid height:100% pull-right col-lg-2 stopka text-center">
+<div class="container-fluid fill-height">
+  <div class="container-fluid fill-height pull-right col-lg-2 stopka text-center">
     <div id="user-widget">
       <% if current_user %>
         Welcome <strong><%= current_user.name %></strong>!
@@ -33,5 +34,6 @@
     </div>
   </div>
   <%= yield %>
+  </div>
 </body>
 </html>

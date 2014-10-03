@@ -16,7 +16,11 @@
       </small>
       <br>
       <h3>
-        <%= article.content %>
+        <% if  article.content.length > 255 %>
+          <%= article.content.first(255)  %><%= link_to '...read more', article %>
+        <% else %>
+          <%= article.content %>
+        <% end %>
       </h3>
       <h5>
         comments: 
@@ -25,8 +29,8 @@
         <% if current_user && current_user.su %>
           <%= link_to 'Edit', edit_article_path(article), class: "tn btn-warning btn-xs" %>
           <%= link_to 'Delete', article, method: :delete, data: {confirm: 'Are you sure?'}, class: "tn btn-danger btn-xs" %> 
-          <%= like_button(782258585130216, href: article)  %>
         <% end %>
+        <%= like_button(782258585130216, href: article)  %>
         <br>
       </h5>
       <% if article.tags != []%>
