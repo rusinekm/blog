@@ -27,7 +27,7 @@ class Article < ActiveRecord::Base
   end
 
   def assign_tags(names_string)
-    tag_names = names_string.split(',').map(&:strip)
+    tag_names = names_string.split(',').map(&:strip).uniq
     tag_names.each do |name|
       temp_tag = Tag.create_by_name(name)
       Relation.new(tag_id: temp_tag.id, article_id: id).save

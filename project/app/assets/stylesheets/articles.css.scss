@@ -4,10 +4,11 @@
 
 
 .separator { 
-    padding: 5px; 
+    padding: 2px; 
+    min-height: 1px;
     }
 .stopka {
-    min-height: 900%;
+    min-height: 50%;
     overflow-y: hidden;;
     background: #f0e68c; 
     }

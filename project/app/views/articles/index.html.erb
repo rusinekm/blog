@@ -36,7 +36,10 @@
       <% if article.tags != []%>
         <p>
           tags: <% article.tags.each do |tag| %>
-            <%= link_to tag.name, articles_path(tag_id: tag.id), class: "btn btn-default btn-xs"%> ,
+            <% unless tag == article.tags.first %>
+              ,
+            <% end %>
+            <%= link_to tag.name, articles_path(tag_id: tag.id), class: "btn btn-default btn-xs"%>
           <% end %>
         </p>
       <% end %>
